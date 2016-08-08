@@ -1,1 +1,6 @@
 
+Install multiple eth ports
+http://getcloudify.org/2014/11/03/openstack-neutron-openstack-nova-network-architecture-automation.html
+TL;DR : 
+echo $'auto eth1\niface eth1 inet dhcp' | sudo tee /etc/network/interfaces.d/eth1.cfg > /dev/null
+sudo ifup eth1
