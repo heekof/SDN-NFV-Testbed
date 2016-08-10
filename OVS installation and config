@@ -4,3 +4,15 @@ http://getcloudify.org/2014/11/03/openstack-neutron-openstack-nova-network-archi
 TL;DR : 
 echo $'auto eth1\niface eth1 inet dhcp' | sudo tee /etc/network/interfaces.d/eth1.cfg > /dev/null
 sudo ifup eth1
+
+
+http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/
+http://networkstatic.net/openflow-openvswitch-lab/
+
+virsh -c qemu:///system list
+http://blog.scottlowe.org/2012/08/21/working-with-kvm-guests/
+
+https://en.wikibooks.org/wiki/QEMU
+
+
+
