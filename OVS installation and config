@@ -18,6 +18,7 @@ wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
 sudo apt-get update
 sudo apt-get --assume-yes install virtualbox-4.3
+---
 wget https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb
 sudo dpkg -i vagrant_1.8.5_x86_64.deb
 mkdir vagrant
@@ -106,3 +107,9 @@ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 feature:install odl-l2switch-switch-ui odl-dlux-all odl-of-config-rest odl-openflowplugin-flow-services-ui odl-bgpcep-pcep odl-sfc-sb-rest
 On the VM where OVS is installed
 sudo ovs-vsctl set-controller br0 tcp:157.159.232.152:6633
+
+
+------
+
+
+For tomorrow http://networkstatic.net/open-vswitch-on-virtualbox/
