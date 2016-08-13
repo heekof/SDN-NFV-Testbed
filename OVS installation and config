@@ -2,10 +2,13 @@
 ----- Install VirtualBox and VAgrant
 
 
-
-
-
-
+sudo echo 'deb http://download.virtualbox.org/virtualbox/debian trusty contrib' >> /etc/apt/sources.list
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+sudo apt-get update
+sudo apt-get --assume-yes install virtualbox-4.3
+wget https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb
+sudo dpkg -i vagrant_1.8.5_x86_64.deb
 
 
 
@@ -27,11 +30,11 @@ http://networkstatic.net/openflow-openvswitch-lab/
 ----- Install OVS
 
 sudo apt-get update && sudo apt-get dist-upgrade
-    sudo apt-get install openvswitch-datapath-source bridge-utils
+    sudo apt-get --assume-yes install openvswitch-datapath-source bridge-utils
     sudo module-assistant auto-install openvswitch-datapath
-    sudo apt-get install openvswitch-common
+    sudo apt-get install openvswitch-common --assume-yes
     ovs-vsctl show
-    sudo apt-get install openvswitch-switch
+    sudo apt-get --assume-yes install openvswitch-switch
     ovs-vsctl add-br br0
     sudo ovs-vsctl add-br br0
     sudo ovs-vsctl add-port br0 eth1
@@ -83,3 +86,20 @@ sudo ovs-vsctl add-br br0
      sudo ovs-vsctl show
      route -n
 ----- https://www.youtube.com/watch?v=rYW7kQRyUvA
+
+
+
+---- How to connect OVS to OpenDaylight
+
+
+mkdir odl
+cd odl
+wget https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.4.3-Beryllium-SR3/distribution-karaf-0.4.3-Beryllium-SR3.tar.gz
+sudo apt-get update
+sudo apt-get --assume-yes install default-jre
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+./bin/karaf
+
+feature:install odl-l2switch-switch-ui odl-dlux-all odl-of-config-rest odl-openflowplugin-flow-services-ui odl-bgpcep-pcep odl-sfc-sb-rest
+On the VM where OVS is installed
+sudo ovs-vsctl set-controller br0 tcp:157.159.232.152:6633
