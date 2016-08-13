@@ -24,16 +24,20 @@ mkdir vagrant
 cd vagrant
 vagrant init ubuntu/trusty32
 
-------
+
+
+
+
+
 http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/
 http://networkstatic.net/openflow-openvswitch-lab/
 
 ----- Install OVS
 
-sudo apt-get update && sudo apt-get dist-upgrade
+    sudo apt-get update && sudo apt-get dist-upgrade
     sudo apt-get --assume-yes install openvswitch-datapath-source bridge-utils
     sudo module-assistant auto-install openvswitch-datapath
-    sudo apt-get install openvswitch-common --assume-yes
+    sudo apt-get  --assume-yes install openvswitch-common
     ovs-vsctl show
     sudo apt-get --assume-yes install openvswitch-switch
     ovs-vsctl add-br br0
@@ -72,15 +76,9 @@ http://www.relaxdiego.com/2014/09/ovs-lab.html
 ------- COnfiggure OVS
 
 
-sudo ovs-vsctl add-br br0
-   52  sudo ovs-vsctl add-port br0 eth1
 
      sudo ifconfig eth1 0
-     ifconfig
-
-
-
-     sudo ifconfig br0 192.168.1.208 netmask 255.255.255.0
+     sudo ifconfig br0 192.168.1.20x netmask 255.255.255.0
      ifconfig
      route -n
      sudo ip tuntap add mode tap vport1
