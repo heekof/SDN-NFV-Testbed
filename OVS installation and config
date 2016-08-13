@@ -1,4 +1,15 @@
 
+-------Install multiple eth ports
+
+
+http://getcloudify.org/2014/11/03/openstack-neutron-openstack-nova-network-architecture-automation.html
+TL;DR :
+-----
+Activate eth1
+echo $'auto eth1\niface eth1 inet dhcp' | sudo tee /etc/network/interfaces.d/eth1.cfg > /dev/null
+sudo ifup eth1
+
+
 ----- Install VirtualBox and VAgrant
 
 
@@ -9,21 +20,11 @@ sudo apt-get update
 sudo apt-get --assume-yes install virtualbox-4.3
 wget https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb
 sudo dpkg -i vagrant_1.8.5_x86_64.deb
+mkdir vagrant
+cd vagrant
+vagrant init ubuntu/trusty32
 
-
-
-
--------
-
-Install multiple eth ports
-http://getcloudify.org/2014/11/03/openstack-neutron-openstack-nova-network-architecture-automation.html
-TL;DR :
------
-Activate eth1
-echo $'auto eth1\niface eth1 inet dhcp' | sudo tee /etc/network/interfaces.d/eth1.cfg > /dev/null
-sudo ifup eth1
-
-
+------
 http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/
 http://networkstatic.net/openflow-openvswitch-lab/
 
@@ -57,9 +58,13 @@ https://smdaudhilbe.wordpress.com/2013/04/11/how-to-install-ubuntu-inside-qemu-e
 https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Administration_Guide/section-libvirt-dom-xml-example.html
 
 And the solution is :  gistfile1.txt
-  config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
-  end
+
+
+            config.vm.provider :virtualbox do |vb|
+                vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
+              #   vb.gui = true
+            end
+            config.vm.network "public_network", bridge: "vport1"
 
 http://www.relaxdiego.com/2014/09/ovs-lab.html
 
