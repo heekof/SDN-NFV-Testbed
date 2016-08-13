@@ -43,4 +43,33 @@ And the solution is :  gistfile1.txt
     vb.customize ["modifyvm", :id, "--hwvirtex", "off"]     
   end
 
+http://www.relaxdiego.com/2014/09/ovs-lab.html
+
+
+-------
+
+
+sudo ovs-vsctl add-br br0
+   52  sudo ovs-vsctl add-port br0 eth1
+   53  sudo ovs-vsctl show
+   54  ifconfig eth1 0
+   55  sudo ifconfig eth1 0
+   56  ifconfig
+   57  dhclient br0 
+   58  sudo dhclient br0 
+   59  ls
+   60  ifconfig
+   61  sudo dhclient br0 
+   62  sudo ifconfig br0 192.168.1.208 netmask 255.255.255.0
+   63  ifconfig
+   64  route -n
+   65  ip tuntap add mode vport1
+   66  ip tuntap add mode tap vport1
+   67  sudo ip tuntap add mode tap vport1
+   68  sudo ifconfig vport1 up
+   69  ifconfig
+   70  ovs-vsctl add-port br0 vport1
+   71  sudo ovs-vsctl add-port br0 vport1
+   72  sudo ovs-vsctl show
+   73  route -n
 
