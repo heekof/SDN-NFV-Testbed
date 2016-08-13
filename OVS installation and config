@@ -1,7 +1,11 @@
 
+----- Install VirtualBox and VAgrant 
+
 Install multiple eth ports
 http://getcloudify.org/2014/11/03/openstack-neutron-openstack-nova-network-architecture-automation.html
 TL;DR : 
+-----
+Activate eth1 
 echo $'auto eth1\niface eth1 inet dhcp' | sudo tee /etc/network/interfaces.d/eth1.cfg > /dev/null
 sudo ifup eth1
 
@@ -9,7 +13,7 @@ sudo ifup eth1
 http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/
 http://networkstatic.net/openflow-openvswitch-lab/
 
------
+----- Install OVS
 
 sudo apt-get update && sudo apt-get dist-upgrade
     sudo apt-get install openvswitch-datapath-source bridge-utils
@@ -46,7 +50,7 @@ And the solution is :  gistfile1.txt
 http://www.relaxdiego.com/2014/09/ovs-lab.html
 
 
--------
+------- COnfiggure OVS
 
 
 sudo ovs-vsctl add-br br0
