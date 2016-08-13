@@ -9,6 +9,22 @@ sudo ifup eth1
 http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/
 http://networkstatic.net/openflow-openvswitch-lab/
 
+-----
+
+sudo apt-get update && sudo apt-get dist-upgrade
+  109  sudo apt-get install openvswitch-datapath-source bridge-utils
+  110  sudo module-assistant auto-install openvswitch-datapath
+  111  sudo apt-get install openvswitch-common
+  112  ovs-vsctl show
+  113  sudo apt-get install openvswitch-switch
+  114  ovs-vsctl add-br br0
+  115  sudo ovs-vsctl add-br br0
+  116  sudo ovs-vsctl add-port br0 eth1
+  117  sudo ovs-vsctl show
+  118  history
+
+------
+
 virsh -c qemu:///system list
 http://blog.scottlowe.org/2012/08/21/working-with-kvm-guests/
 
