@@ -22,5 +22,9 @@ https://help.ubuntu.com/community/KVM/Virsh
 https://smdaudhilbe.wordpress.com/2013/04/11/how-to-install-ubuntu-inside-qemu-emulator-and-make-a-virtual-machine/
 https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Administration_Guide/section-libvirt-dom-xml-example.html
 
+And the solution is :  gistfile1.txt
+  config.vm.provider :virtualbox do |vb|  
+    vb.customize ["modifyvm", :id, "--hwvirtex", "off"]     
+  end
 
 
