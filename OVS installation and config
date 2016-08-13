@@ -12,16 +12,16 @@ http://networkstatic.net/openflow-openvswitch-lab/
 -----
 
 sudo apt-get update && sudo apt-get dist-upgrade
-  109  sudo apt-get install openvswitch-datapath-source bridge-utils
-  110  sudo module-assistant auto-install openvswitch-datapath
-  111  sudo apt-get install openvswitch-common
-  112  ovs-vsctl show
-  113  sudo apt-get install openvswitch-switch
-  114  ovs-vsctl add-br br0
-  115  sudo ovs-vsctl add-br br0
-  116  sudo ovs-vsctl add-port br0 eth1
-  117  sudo ovs-vsctl show
-  118  history
+    sudo apt-get install openvswitch-datapath-source bridge-utils
+    sudo module-assistant auto-install openvswitch-datapath
+    sudo apt-get install openvswitch-common
+    ovs-vsctl show
+    sudo apt-get install openvswitch-switch
+    ovs-vsctl add-br br0
+    sudo ovs-vsctl add-br br0
+    sudo ovs-vsctl add-port br0 eth1
+    sudo ovs-vsctl show
+  
 
 ------
 
@@ -51,25 +51,21 @@ http://www.relaxdiego.com/2014/09/ovs-lab.html
 
 sudo ovs-vsctl add-br br0
    52  sudo ovs-vsctl add-port br0 eth1
-   53  sudo ovs-vsctl show
-   54  ifconfig eth1 0
-   55  sudo ifconfig eth1 0
-   56  ifconfig
-   57  dhclient br0 
-   58  sudo dhclient br0 
-   59  ls
-   60  ifconfig
-   61  sudo dhclient br0 
-   62  sudo ifconfig br0 192.168.1.208 netmask 255.255.255.0
-   63  ifconfig
-   64  route -n
-   65  ip tuntap add mode vport1
-   66  ip tuntap add mode tap vport1
-   67  sudo ip tuntap add mode tap vport1
-   68  sudo ifconfig vport1 up
-   69  ifconfig
-   70  ovs-vsctl add-port br0 vport1
-   71  sudo ovs-vsctl add-port br0 vport1
-   72  sudo ovs-vsctl show
-   73  route -n
+   
+     sudo ifconfig eth1 0
+     ifconfig
+      
+     
+     
+     sudo ifconfig br0 192.168.1.208 netmask 255.255.255.0
+     ifconfig
+     route -n
+     sudo ip tuntap add mode tap vport1
+     sudo ifconfig vport1 up
+     ifconfig
+     ovs-vsctl add-port br0 vport1
+     sudo ovs-vsctl add-port br0 vport1
+     sudo ovs-vsctl show
+     route -n
+----- https://www.youtube.com/watch?v=rYW7kQRyUvA
 
