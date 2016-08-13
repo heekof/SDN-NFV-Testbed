@@ -1,11 +1,22 @@
 
------ Install VirtualBox and VAgrant 
+----- Install VirtualBox and VAgrant
+
+
+
+
+
+
+
+
+
+
+-------
 
 Install multiple eth ports
 http://getcloudify.org/2014/11/03/openstack-neutron-openstack-nova-network-architecture-automation.html
-TL;DR : 
+TL;DR :
 -----
-Activate eth1 
+Activate eth1
 echo $'auto eth1\niface eth1 inet dhcp' | sudo tee /etc/network/interfaces.d/eth1.cfg > /dev/null
 sudo ifup eth1
 
@@ -25,7 +36,7 @@ sudo apt-get update && sudo apt-get dist-upgrade
     sudo ovs-vsctl add-br br0
     sudo ovs-vsctl add-port br0 eth1
     sudo ovs-vsctl show
-  
+
 
 ------
 
@@ -43,8 +54,8 @@ https://smdaudhilbe.wordpress.com/2013/04/11/how-to-install-ubuntu-inside-qemu-e
 https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Administration_Guide/section-libvirt-dom-xml-example.html
 
 And the solution is :  gistfile1.txt
-  config.vm.provider :virtualbox do |vb|  
-    vb.customize ["modifyvm", :id, "--hwvirtex", "off"]     
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
   end
 
 http://www.relaxdiego.com/2014/09/ovs-lab.html
@@ -55,12 +66,12 @@ http://www.relaxdiego.com/2014/09/ovs-lab.html
 
 sudo ovs-vsctl add-br br0
    52  sudo ovs-vsctl add-port br0 eth1
-   
+
      sudo ifconfig eth1 0
      ifconfig
-      
-     
-     
+
+
+
      sudo ifconfig br0 192.168.1.208 netmask 255.255.255.0
      ifconfig
      route -n
@@ -72,4 +83,3 @@ sudo ovs-vsctl add-br br0
      sudo ovs-vsctl show
      route -n
 ----- https://www.youtube.com/watch?v=rYW7kQRyUvA
-
