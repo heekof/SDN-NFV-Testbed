@@ -33,19 +33,28 @@ vagrant init ubuntu/trusty32
 http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/
 http://networkstatic.net/openflow-openvswitch-lab/
 
------ Install OVS
+----- Install OVS & config
 
     sudo apt-get update && sudo apt-get dist-upgrade
     sudo apt-get --assume-yes install openvswitch-datapath-source bridge-utils
     sudo module-assistant auto-install openvswitch-datapath
     sudo apt-get  --assume-yes install openvswitch-common
-    ovs-vsctl show
     sudo apt-get --assume-yes install openvswitch-switch
-    ovs-vsctl add-br br0
     sudo ovs-vsctl add-br br0
+    sudo ifconfig br0 up
     sudo ovs-vsctl add-port br0 eth1
     sudo ovs-vsctl show
 
+    sudo ifconfig eth1 0
+    sudo ifconfig br0 192.168.1.20x netmask 255.255.255.0
+    ifconfig
+    route -n
+    sudo ip tuntap add mode tap vport1
+    sudo ifconfig vport1 up
+    sudo ovs-vsctl add-port br0 vport1
+    sudo ovs-vsctl show
+    route -n
+    ----- https://www.youtube.com/watch?v=rYW7kQRyUvA
 
 ------
 
@@ -69,27 +78,12 @@ And the solution is :  gistfile1.txt
                 vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
               #   vb.gui = true
             end
-            config.vm.network "public_network", bridge: "vport1"
+            config.vm.network "public_network", auto-config: false
 
 http://www.relaxdiego.com/2014/09/ovs-lab.html
 
 
-------- COnfiggure OVS
 
-
-
-     sudo ifconfig eth1 0
-     sudo ifconfig br0 192.168.1.20x netmask 255.255.255.0
-     ifconfig
-     route -n
-     sudo ip tuntap add mode tap vport1
-     sudo ifconfig vport1 up
-     ifconfig
-     ovs-vsctl add-port br0 vport1
-     sudo ovs-vsctl add-port br0 vport1
-     sudo ovs-vsctl show
-     route -n
------ https://www.youtube.com/watch?v=rYW7kQRyUvA
 
 
 
