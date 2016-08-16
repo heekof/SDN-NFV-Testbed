@@ -1,4 +1,5 @@
 
+
 -------Install multiple eth ports
 
 
@@ -74,11 +75,14 @@ https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Vi
 And the solution is :  gistfile1.txt
 
 
-            config.vm.provider :virtualbox do |vb|
-                vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
-              #   vb.gui = true
-            end
-            config.vm.network "public_network", auto-config: false
+config.vm.provider :virtualbox do |vb|
+              vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
+              vb.name = "ellis"
+              vb.memory = 2024
+              vb.cpus = 1
+            # vb.gui = true
+end
+#  config.vm.network "public_network", bridge: "vport1"
 
 http://www.relaxdiego.com/2014/09/ovs-lab.html
 

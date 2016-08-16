@@ -1,1 +1,79 @@
 
+create /etc/apt/sources.list.d/clearwater.list with the following contents:
+        deb http://repo.cw-ngv.com/stable binary/
+curl -L http://repo.cw-ngv.com/repo_key | sudo apt-key add -
+---
+sudo apt-key finger
+
+sudo apt-get update
+
+
+sudo nano /etc/clearwater/local_config
+
+      local_ip=<privateIP>
+      public_ip=<publicIP>
+      public_hostname=<hostname>
+      etcd_cluster="<comma separated list of private IPs>"
+
+Note that the etcd_cluster variable should be set to a comma separated list that contains the private IP address of the nodes
+you created above. For example if the nodes had addresses 10.0.0.1 to 10.0.0.6, etcd_cluster should be set to
+"10.0.0.1,10.0.0.2,10.0.0.3,10.0.0.4,10.0.0.5,10.0.0.6"
+
+
+If this machine will be a Sprout or Ralf node create the file /etc/chronos/chronos.conf with the following contents:
+
+/etc/chronos/chronos.conf
+
+      [http]
+      bind-address = <privateIP>
+      bind-port = 7253
+      threads = 50
+
+      [logging]
+      folder = /var/log/chronos
+      level = 2
+
+      [alarms]
+      enabled = true
+
+      [exceptions]
+      max_ttl = 600
+
+
+
+      Install Node-Specific Software
+      ssh onto each box in turn and follow the appropriate instructions below according to the role the node will take in the deployment:
+
+      Ellis
+      Install the Ellis package with:
+
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install ellis --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
+      Bono
+      Install the Bono and Restund packages with:
+
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install bono restund --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
+      Sprout
+      Install the Sprout package with:
+
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install sprout --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
+      If you want the Sprout nodes to include a Memento Application server, then install the Memento packages with:
+
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install memento-as memento-nginx --yes
+      Homer
+      Install the Homer packages with:
+
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install homer --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
+      Homestead
+      Install the Homestead packages with:
+
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install homestead homestead-prov clearwater-prov-tools --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
+      Ralf
+      Install the Ralf package with:
+
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install ralf --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
