@@ -36,7 +36,7 @@ http://networkstatic.net/openflow-openvswitch-lab/
 
 ----- Install OVS & config
 
-    sudo apt-get update && sudo apt-get dist-upgrade
+    #sudo apt-get update && sudo apt-get dist-upgrade
     sudo apt-get --assume-yes install openvswitch-datapath-source bridge-utils
     sudo module-assistant auto-install openvswitch-datapath
     sudo apt-get  --assume-yes install openvswitch-common
@@ -111,3 +111,18 @@ sudo ovs-vsctl set-controller br0 tcp:157.159.232.152:6633
 
 
 For tomorrow http://networkstatic.net/open-vswitch-on-virtualbox/
+
+
+
+------------- OVS script
+
+
+
+#!/bin/bash
+
+sudo ovs-vsctl add-br br0
+sudo ovs-vsctl add-port br0 eth0
+sudo ifconfig eth0 0.0.0.0
+sudo ifconfig br0 10.11.12.5 netmask 255.255.255.0 broadcast 10.11.12.255
+sudo route del default gw 10.11.12.1 eth0
+sudo route add default gw 10.11.12.1 br0
