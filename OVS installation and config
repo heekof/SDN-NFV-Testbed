@@ -114,15 +114,18 @@ For tomorrow http://networkstatic.net/open-vswitch-on-virtualbox/
 
 
 
-------------- OVS script
+------------- OVS solved ----------------------
 
+Here are the steps I use. It is important to use the IP and MAC on the bridge that Neutron allocated for the port, as it applies antispoofing filters.
 
+ip address del 172.16.34.5/24 dev eth1
+ovs-vsctl add-br br-eth1
+ovs-vsctl add-port br-eth1 eth1
+cat /sys/class/net/eth1/address
+fa:16:3e:ba:ec:b8
+ip link set dev br-eth1 address fa:16:3e:ba:ec:b8
+ip link set dev eth1 up
+ip link set dev br-eth1 up
+ip address add 172.16.34.5/24 dev br-eth1
 
-#!/bin/bash
-
-sudo ovs-vsctl add-br br0
-sudo ovs-vsctl add-port br0 eth0
-sudo ifconfig eth0 0.0.0.0
-sudo ifconfig br0 10.11.12.5 netmask 255.255.255.0 broadcast 10.11.12.255
-sudo route del default gw 10.11.12.1 eth0
-sudo route add default gw 10.11.12.1 br0
+------------------------------------

@@ -13,7 +13,7 @@ sudo nano /etc/clearwater/local_config
       local_ip=10.11.12.X
       public_ip=157.159.232.X
       public_hostname=<hostname>
-      etcd_cluster="10.11.12.6,10.11.12.5,10.11.12.4,10.11.12.8,10.11.12.4,10.11.12.2"
+      etcd_cluster="10.11.12.6,10.11.12.5,10.11.12.4,10.11.12.8,10.11.12.14,10.11.12.2"
 
 Note that the etcd_cluster variable should be set to a comma separated list that contains the private IP address of the nodes
 you created above. For example if the nodes had addresses 10.0.0.1 to 10.0.0.6, etcd_cluster should be set to
