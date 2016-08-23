@@ -77,3 +77,16 @@ If this machine will be a Sprout or Ralf node create the file /etc/chronos/chron
 
       sudo DEBIAN_FRONTEND=noninteractive apt-get install ralf --yes
       sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
+
+
+
+BIND config
+
+
+
+
+https://huaminchen.wordpress.com/2015/07/10/tenant-name-or-tenant-id-in-openstack-keystone/
+
+
+
+https://www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-private-network-dns-server-on-ubuntu-14-04
