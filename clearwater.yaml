@@ -166,7 +166,7 @@ parameters:
 
 resources:
   mgmt_network:
-    type: file:/home/jaafar/Downloads/network.yaml
+    type: https://github.com/heekof/SDN-NFV-Testbed/blob/master/clearwater.yaml
     properties:
       public_net_id: { get_param: public_mgmt_net_id }
       private_net_name: { str_replace: { params: { __stack__: { get_param: "OS::stack_name" } }, template: __stack__-private-management } }
@@ -177,7 +177,7 @@ resources:
       dns_ip: { get_param: external_mgmt_dns_ip }
 
   sig_network:
-    type: file:/home/jaafar/Downloads/network.yaml
+    type: https://github.com/heekof/SDN-NFV-Testbed/blob/master/clearwater.yaml
     properties:
       public_net_id: { get_param: public_sig_net_id }
       private_net_name: { str_replace: { params: { __stack__: { get_param: "OS::stack_name" } }, template: __stack__-private-signaling } }
@@ -189,12 +189,12 @@ resources:
       dns_ip: { get_param: external_sig_dns_ip }
 
   security_groups:
-    type: ./security-groups.yaml
+    type: https://github.com/heekof/SDN-NFV-Testbed/blob/master/security-groups.yaml
     properties:
       name_prefix: { get_param: "OS::stack_name" }
 
   dns:
-    type: ./dns.yaml
+    type: https://github.com/heekof/SDN-NFV-Testbed/blob/master/dns.yaml
     properties:
       public_mgmt_net_id: { get_param: public_mgmt_net_id }
       private_mgmt_net_id: { get_attr: [ mgmt_network, private_net ] }
@@ -209,7 +209,7 @@ resources:
       dnssec_key: { get_param: dnssec_key }
 
   ellis:
-    type: ./ellis.yaml
+    type: https://github.com/heekof/SDN-NFV-Testbed/blob/master/ellis.yaml
     properties:
       public_mgmt_net_id: { get_param: public_mgmt_net_id }
       private_mgmt_net_id: { get_attr: [ mgmt_network, private_net ] }
