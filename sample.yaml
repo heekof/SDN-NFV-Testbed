@@ -1,0 +1,107 @@
+heat_template_version: 2013-05-23
+description: A simple template which creates a device template and a device
+parameters:
+ mgmt-if:
+ type:string
+ description : management Subnet
+ default : 30.0.0.0/24
+ private:
+ type: string
+ description: Packet-IN Subnet
+ default : 20.0.0.0/24
+ name:
+ type: string
+ description: Name of the service
+ default : Ims
+ router:
+ type: string
+ description: Router name
+ default : VNF_Router
+ quality_of_service:
+ type: string
+ description: Quality of service
+ default : Silver
+resources:
+ router_n:
+ type: OS::Neutron::Router
+ properties:
+ name:VNF_Router network_m:
+ type: OS::Neutron::Net
+ properties: {name:management}
+ subnet_m:
+ type: OS::Neutron::Subnet
+ properties:
+ name : management_subnet
+ network_id: {Ref: network_m}
+ cidr: { get_param: mgmt-if }
+ ip_version: 4
+       network_private:
+ type: OS::Neutron::Net
+ properties: {name: private}
+ subnet_private:
+ type: OS::Neutron::Subnet
+ properties:
+ name : private_subnet
+ network_id: {Ref: network_private}
+ cidr: { get_param: private }
+ ip_version: 4
+router_intrfc_m:
+ type: OS::Neutron::RouterInterface
+ properties:
+ router_id: {Ref: router_n}
+ subnet_id: {Ref: subnet_m}
+ service:
+ type: OS::VNFSvc::Service
+ properties:
+ name:{get_param: name}
+ description: VNF Service quality_of_
+service: {get_param: quality_
+of_	service attributes:
+{‘networks’:{‘mgmt-if’: {get_attr: [subnet_m, network_id]},‘private’:{get_attr: [subnet_private,network_id]}}, ‘router’ : {get_param: router},’subnets’:{‘mgmt-if’:{“Ref”: “subnet_m”}, ‘private’:{“Ref”:“subnet_private”}, ‘router-iface’:{Ref:router_intrfc_m}}}
+ zopier_network:
+ type: OS::Neutron::Net
+ properties:
+ name: user_network_1
+ depends_on: service
+ zopier_subnet:
+ type: OS::Neutron::Subnet
+ properties:
+ name: user_subnet_1
+ network_id: { Ref: zopier_network }
+       cidr: 80.0.0.0/24
+ my_router_interface:
+ type: OS::Neutron::RouterInterface
+ properties:
+ router_id: {Ref: router_n}
+ subnet_id: {Ref: zopier_subnet}
+ my_instance:
+ type: OS::Nova::Server
+ properties:
+ name: zopier_1
+ image: 2a2eb7af-1989-4865-a8d4-
+ 038f36fca5e2
+ flavor: m1.medium
+ networks: [network:Ref:zopier_network}
+ zopier_network_1:
+ type: OS::Neutron::Net
+ properties:
+ name: user_network_2
+ depends_on: service
+ zopier_subnet_1:
+ type: OS::Neutron::Subnet
+ properties:
+ name: user_subnet_2
+ network_id:{Ref: zopier_network_1}
+ cidr: 90.0.0.0/24
+ my_router_interface_1:
+ type: OS::Neutron::RouterInterface
+ properties:
+ router_id:{Ref: router_n}
+ subnet_id:{Ref: zopier_subnet_1}
+ my_instance_w1:
+ type: OS::Nova::Server
+ properties:
+ name: zopier_2
+ image: 2a2eb7af-1989-4865-a8d4-038f36fca5e2
+ flavor: m1.medium
+ networks:[network:{Ref: zopier_network_1}]

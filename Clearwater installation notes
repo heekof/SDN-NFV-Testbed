@@ -99,3 +99,34 @@ sudo iptables -I INPUT -p udp --dport 22  -j ACCEPT
 
 Test if a port is open
 nc -z -v -w5 localhost 445
+
+sudo iptables -L
+
+
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -F
+
+
+-------------------
+
+heat stack-create clearwater -f clearwater.yaml -P "public_mgmt_net_id=28a796b7-e2cf-477c-8f6a-8233934e32e4;public_sig_net_id=60df17d4-7494-45bd-aecf-001199adaffb;dnssec_key=5ljA2VP3CfZUzqSMZmitvXZfk6/KkUjP5Aae/JenkdycUGxhD55nV2B5edjjUuwim2NQWi1LCyCj8vgd6b7vEg==;image=205ff12f-25c4-4ffd-abec-4f0a36a996c9;flavor=medium;key_name=ici"
+
+
+export OS_TENANT_ID=646fc891f5e8475c8125a653ab2508c3
+export OS_PROJECT_NAME=jaafarj
+export OS_PASSWORD=marocfrance1
+export OS_AUTH_URL=http://157.159.232.52:5000/v2.0
+export OS_USERNAME=jaafar
+
+6505550261@example.com
+Password: mT7ngYsYz
+
+TATA
+
+TATA@TITI.org
+
+
+Test :
+        $ rake test[example.com] SIGNUP_CODE=secret PROXY=localhost ELLIS=localhost
