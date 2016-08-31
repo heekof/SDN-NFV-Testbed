@@ -7,13 +7,14 @@ sudo apt-key finger
 
 sudo apt-get update
 
+sudo DEBIAN_FRONTEND=noninteractive apt-get install bono restund --yes --force-yes -o DPkg::options::=--force-confnew
 
 sudo nano /etc/clearwater/local_config
 
-      local_ip=10.11.12.X
-      public_ip=157.159.232.X
-      public_hostname=<hostname>
-      etcd_cluster="10.11.12.6,10.11.12.5,10.11.12.4,10.11.12.8,10.11.12.14,10.11.12.2"
+local_ip=192.166.1.X
+public_ip=157.159.232.X
+public_hostname=<hostname>
+etcd_cluster="192.166.1.178,192.166.1.183,192.166.1.177,192.166.1.182,192.166.1.179,192.166.1.181"
 
 Note that the etcd_cluster variable should be set to a comma separated list that contains the private IP address of the nodes
 you created above. For example if the nodes had addresses 10.0.0.1 to 10.0.0.6, etcd_cluster should be set to
@@ -39,6 +40,9 @@ If this machine will be a Sprout or Ralf node create the file /etc/chronos/chron
       [exceptions]
       max_ttl = 600
 
+      [dns]
+
+      server=8.8.8.8
 
 
       Install Node-Specific Software
@@ -47,17 +51,17 @@ If this machine will be a Sprout or Ralf node create the file /etc/chronos/chron
       Ellis
       Install the Ellis package with:
 
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install ellis --yes
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install ellis --yes --force-yes -o DPkg::options::=--force-confnew
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes --force-yes
       Bono
       Install the Bono and Restund packages with:
 
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install bono restund --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install bono restund --yes -force-yes -o DPkg::options::=--force-confnew
       sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
       Sprout
       Install the Sprout package with:
 
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install sprout --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install sprout --yes -force-yes -o DPkg::options::=--force-confnew
       sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
       If you want the Sprout nodes to include a Memento Application server, then install the Memento packages with:
 
@@ -65,17 +69,17 @@ If this machine will be a Sprout or Ralf node create the file /etc/chronos/chron
       Homer
       Install the Homer packages with:
 
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install homer --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install homer --yes -force-yes -o DPkg::options::=--force-confnew
       sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
       Homestead
       Install the Homestead packages with:
 
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install homestead homestead-prov clearwater-prov-tools --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install homestead homestead-prov clearwater-prov-tools --yes -force-yes -o DPkg::options::=--force-confnew
       sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
       Ralf
       Install the Ralf package with:
 
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install ralf --yes
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install ralf --yes -force-yes -o DPkg::options::=--force-confnew
       sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
 
 
@@ -119,14 +123,218 @@ export OS_PROJECT_NAME=jaafarj
 export OS_PASSWORD=marocfrance1
 export OS_AUTH_URL=http://157.159.232.52:5000/v2.0
 export OS_USERNAME=jaafar
+---------------------
 
-6505550261@example.com
-Password: mT7ngYsYz
+name : TATA
 
-TATA
+qljfq@sfdsf.com
 
-TATA@TITI.org
+6505550244@jaafarbendriss.com
+Reset
+Password: 8rt48Pb86
+
+---------------
+
+6505550006@jaafarbendriss.com
+Reset
+Password: QEsxcPFbd
+
+
+
+--------------
 
 
 Test :
         $ rake test[example.com] SIGNUP_CODE=secret PROXY=localhost ELLIS=localhost
+
+--------------
+
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+------------------------
+
+
+
+# Deployment definitions
+home_domain=jaafarbendriss.com
+sprout_hostname=sprout.jaafarbendriss.com
+hs_hostname=hs.jaafarbendriss.com:8888
+hs_provisioning_hostname=hs.jaafarbendriss.com:8889
+chronos_hostname=192.166.1.183:7253
+ralf_hostname=ralf.jaafarbendriss.com:10888
+xdms_hostname=homer.jaafarbendriss.com:7888
+
+# Email server configuration
+smtp_smarthost=<smtp server>
+smtp_username=username
+smtp_password=password
+email_recovery_sender=TATA@TOTO.org
+
+# Keys
+signup_key=secret
+turn_workaround=secret
+ellis_api_key=secret
+ellis_cookie_key=secret
+
+local_ip=192.166.1.X
+public_ip=157.159.232.X
+public_hostname=X.jaafarbendriss.com
+
+------- Install scripts
+
+All nodes:
+
+sudo bash -c 'echo "deb http://repo.cw-ngv.com/stable binary/" > /etc/apt/sources.list.d/clearwater.list '
+curl -L http://repo.cw-ngv.com/repo_key | sudo apt-key add -
+sudo apt-get update
+sudo mkdir -p /etc/clearwater
+sudo bash -c ' echo -e "local_ip=192.166.1.X \n public_ip=157.159.232.X \n public_hostname=X.jaafarbendriss.com \n etcd_cluster=\"192.166.1.178,192.166.1.183,192.166.1.177,192.166.1.182,192.166.1.179,192.166.1.181\"" > /etc/clearwater/local_config'
+sudo bash -c 'echo -e "# Deployment definitions \n home_domain=jaafarbendriss.com \n sprout_hostname=sprout.jaafarbendriss.com \n chronos_hostname=192.166.1.183:7253 \n hs_hostname=homestead.jaafarbendriss.com:8888 \n hs_provisioning_hostname=homestead.jaafarbendriss.com:8889 \n ralf_hostname=ralf.jaafarbendriss.com:10888 \n xdms_hostname=homer.jaafarbendriss.com:7888 \n # Email server configuration \n #smtp_smarthost=<smtp server> \n smtp_username=username \n smtp_password=password \n email_recovery_sender=clearwater@example.org \n # Keys \n signup_key=secret \n turn_workaround=secret \n ellis_api_key=secret \n ellis_cookie_key=secret \n  #Local Ip configuration \n local_ip= \n public_ip= \n public_hostname= X.jaafarbendriss.com" > /etc/clearwater/shared_config '
+
+
+sudo bash -c 'echo -e "#!/bin/bash \n sudo service bono restart && sudo service clearwater-etcd restart" > script.sh '
+sudo chmod +x script.sh
+
+/usr/share/clearwater/clearwater-cluster-manager/scripts/check_cluster_state
+
+tail -f /var/log/monit.log
+
+  ellis
+
+
+
+  sudo ufw enable
+  sudo ufw allow 22/tcp
+  sudo ufw allow 2380/tcp
+  sudo ufw allow 4000/tcp
+  sudo ufw allow 161:162/udp
+  sudo ufw allow 10888/tcp
+  sudo ufw allow 7253/tcp
+  sudo ufw allow 11211/tcp
+  sudo ufw allow  80/tcp
+
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install ellis --yes --force-yes
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes --force-yes
+  sudo service clearwater-etcd status
+  sudo service ellis status
+
+  sudo bash -c 'echo -e "export PATH=/usr/share/clearwater/ellis/env/bin:$PATH \n cd /usr/share/clearwater/ellis/src/metaswitch/ellis/tools/ \n python create_numbers.py --start 6505550000 --count 1000" > create_number.py'
+  sudo chmod +x create_number.py
+  sudo ./create_number.py
+
+  bono
+
+  sudo ufw enable
+  sudo ufw allow 22/tcp
+  sudo ufw allow 2380/tcp
+  sudo ufw allow 4000/tcp
+  sudo ufw allow 161:162/udp
+  sudo ufw allow 3478
+  sudo ufw allow 5060
+  sudo ufw allow 5062/tcp
+  sudo ufw allow 32768:65535/udp
+  sudo ufw allow 5058/tcp
+
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install bono restund --yes --force-yes
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes --force-yes
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-snmpd --yes --force-yes
+  sudo service clearwater-etcd status
+  sudo service bono status
+
+
+  sprout
+
+  sudo ufw enable
+  sudo ufw allow 22/tcp
+  sudo ufw allow 2380/tcp
+  sudo ufw allow 4000/tcp
+  sudo ufw allow 161:162/udp
+  sudo ufw allow 5054/tcp
+  sudo ufw allow 5052/tcp
+  sudo ufw allow 11211/tcp
+  sudo ufw allow 7253/tcp
+  sudo ufw allow 7000/tcp
+  sudo ufw allow 9160/tcp
+  sudo ufw allow 9888/tcp
+  sudo ufw allow 443/tcp
+
+  sudo mkdir -p /etc/chronos
+  sudo bash -c ' echo -e "[http] \n   bind-address = 192.166.1.183  \n   bind-port = 7253 \n  threads = 50 \n   [logging] \n   folder = /var/log/chronos \n   level = 2 \n   [alarms] \n  enabled = true \n   [exceptions] \n   max_ttl = 600 \n   [dns] \n   server=8.8.8.8" > /etc/chronos/chronos.conf'
+
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install sprout --yes --force-yes
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes --force-yes
+  sudo service clearwater-etcd status
+  sudo service sprout status
+
+
+
+
+  homer
+
+  sudo ufw enable
+  sudo ufw allow 22/tcp
+  sudo ufw allow 2380/tcp
+  sudo ufw allow 4000/tcp
+  sudo ufw allow 161:162/udp
+  sudo ufw allow 7888/tcp
+  sudo ufw allow 7000/tcp
+
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install homer --yes --force-yes
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes --force-yes
+  sudo service clearwater-etcd status
+  sudo service homer status
+
+  homestead
+
+  sudo ufw enable
+  sudo ufw allow 22/tcp
+  sudo ufw allow 4000/tcp
+  sudo ufw allow 2380/tcp
+  sudo ufw allow 161:162/udp
+  sudo ufw allow 8888/tcp
+  sudo ufw allow 8889/tcp
+  sudo ufw allow 7000/tcp
+
+
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install homestead homestead-prov clearwater-prov-tools --yes --force-yes
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes --force-yes
+  sudo service clearwater-etcd status
+  sudo service homestead status
+
+
+  ralf
+
+  sudo ufw enable
+  sudo ufw allow 22/tcp
+  sudo ufw allow 2380/tcp
+  sudo ufw allow 4000/tcp
+  sudo ufw allow 161:162/udp
+  sudo ufw allow 80/tcp
+  sudo ufw allow 443/tcp
+  sudo mkdir -p /etc/chronos
+  sudo bash -c ' echo -e "[http] \n   bind-address = 192.166.1.182  \n   bind-port = 7253 \n  threads = 50 \n   [logging] \n   folder = /var/log/chronos \n   level = 2 \n   [alarms] \n  enabled = true \n   [exceptions] \n   max_ttl = 600 \n   [dns] \n   server=8.8.8.8" > /etc/chronos/chronos.conf'
+
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install ralf --yes --force-yes
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes --force-yes
+  sudo service clearwater-etcd status
+  sudo service ralf status
+
+
+sudo bash -c 'echo "nameserver 192.166.1.180" > /etc/dnsmasq.resolv.conf'
+sudo touch /etc/dnsmasq.resolv.conf
+sudo bash -c 'echo "nameserver 192.166.1.180" > /etc/dnsmasq.resolv.conf'
+sudo bash -c 'echo "RESOLV_CONF=/etc/dnsmasq.resolv.conf" >> /etc/default/dnsmasq'
+sudo service dnsmasq restart
+
+
+------------------
+sudo nano /etc/hosts
+
+192.166.1.177 ellis.jaafar.com
+192.166.1.178 bono.jaafar.com
+192.166.1.183 sprout.jaafar.com
+192.166.1.179 homer.jaafar.com
+192.166.1.181 homestead.jaafar.com
+192.166.1.182 ralf.jaafar.com
