@@ -37,12 +37,14 @@ http://networkstatic.net/openflow-openvswitch-lab/
 ----- Install OVS & config
 
     #sudo apt-get update && sudo apt-get dist-upgrade
+    sudo apt-get update
     sudo apt-get --assume-yes install openvswitch-datapath-source bridge-utils
     sudo module-assistant auto-install openvswitch-datapath
     sudo apt-get  --assume-yes install openvswitch-common
     sudo apt-get --assume-yes install openvswitch-switch
     sudo ovs-vsctl add-br br0
     sudo ifconfig br0 up
+#You stop here
     sudo ovs-vsctl add-port br0 eth1
     sudo ovs-vsctl show
 
@@ -56,9 +58,46 @@ http://networkstatic.net/openflow-openvswitch-lab/
     sudo ovs-vsctl show
     route -n
     ----- https://www.youtube.com/watch?v=rYW7kQRyUvA
+    ------------- OVS solved ----------------------
 
-------
+    Here are the steps I use. It is important to use the IP and MAC on the bridge that Neutron allocated for the port, as it applies antispoofing filters.
 
+    ip address del 172.16.34.5/24 dev eth1
+    ovs-vsctl add-br br-eth1
+    ovs-vsctl add-port br-eth1 eth1
+    cat /sys/class/net/eth1/address
+    fa:16:3e:ba:ec:b8
+    ip link set dev br-eth1 address fa:16:3e:ba:ec:b8
+    ip link set dev eth1 up
+    ip link set dev br-eth1 up
+    ip address add 172.16.34.5/24 dev br-eth1
+
+    ------------------------------------
+   script:
+
+   sudo bash -c 'echo -e  "#!/bin/bash\n\nsudo ovs-vsctl add-br br1\nsudo ovs-vsctl add-port br1 eth0\nsudo ifconfig eth0 0\nsudo ip link set dev br1 address "$(cat /sys/class/net/eth0/address)"\nsudo dhclient br1\n" > script.sh'
+   sudo chmod +x script.sh
+   touch error.log
+   sudo ./script.sh 2>&1 | tee -a error.log
+
+
+
+------------------------ The file --------------------
+
+#!/bin/bash
+
+sudo ovs-vsctl add-br br1
+sudo ovs-vsctl add-port br1 eth0
+sudo ip link set dev br1 address fa:16:3e:8e:66:ba
+sudo ifconfig eth0 0
+sudo dhclient br1
+
+
+
+----------------------------------------------------
+
+
+    ------------------------------
 virsh -c qemu:///system list
 http://blog.scottlowe.org/2012/08/21/working-with-kvm-guests/
 
@@ -114,21 +153,7 @@ For tomorrow http://networkstatic.net/open-vswitch-on-virtualbox/
 
 
 
-------------- OVS solved ----------------------
 
-Here are the steps I use. It is important to use the IP and MAC on the bridge that Neutron allocated for the port, as it applies antispoofing filters.
-
-ip address del 172.16.34.5/24 dev eth1
-ovs-vsctl add-br br-eth1
-ovs-vsctl add-port br-eth1 eth1
-cat /sys/class/net/eth1/address
-fa:16:3e:ba:ec:b8
-ip link set dev br-eth1 address fa:16:3e:ba:ec:b8
-ip link set dev eth1 up
-ip link set dev br-eth1 up
-ip address add 172.16.34.5/24 dev br-eth1
-
-------------------------------------
 Run without sudo
 
 
@@ -146,4 +171,4 @@ Fullname = heskojr
 Private Identity:
 
 6505550225@example.com
-Password: vtyK7PCSM 
+Password: vtyK7PCSM

@@ -1,0 +1,2 @@
+ansible [group] -m ping
+ansible-playbook openvswitch/ovs_install.yaml --tags=configure

@@ -40,9 +40,7 @@ If this machine will be a Sprout or Ralf node create the file /etc/chronos/chron
       [exceptions]
       max_ttl = 600
 
-      [dns]
-
-      server=8.8.8.8
+    
 
 
       Install Node-Specific Software
