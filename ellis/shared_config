@@ -1,0 +1,18 @@
+# Deployment definitions 
+ home_domain=jaafar.com 
+ sprout_hostname=sprout.jaafar.com 
+ chronos_hostname=192.166.1.183:7253 
+ hs_hostname=homestead.jaafar.com:8888 
+ hs_provisioning_hostname=homestead.jaafar.com:8889 
+ ralf_hostname=ralf.jaafar.com:10888 
+ xdms_hostname=homer.jaafar.com:7888 
+ # Email server configuration 
+ #smtp_smarthost=<smtp server> 
+ smtp_username=username 
+ smtp_password=password 
+ email_recovery_sender=clearwater@example.org 
+ # Keys 
+ signup_key=secret 
+ turn_workaround=secret 
+ ellis_api_key=secret 
+ ellis_cookie_key=secret 
