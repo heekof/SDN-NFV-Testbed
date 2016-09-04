@@ -1,0 +1,23 @@
+feature:install odl-l2switch-switch odl-l2switch-switch-ui odl-dlux-all odl-netconf-connector-ssh odl-of-config-rest odl-ovsdb-openstack odl-ovsdb-southbound-impl-ui odl-ovsdb-sfc-ui odl-openflowplugin-flow-services-ui odl-restconf odl-sdninterfaceapp-all odl-sfc-sb-rest odl-snmp-plugin odl-snmp4sdn-all odl-topoprocessing-framework
+ssh: ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 8101 karaf@<controllerIP>
+
+
+
+sudo nano distribution-karaf-0.4.3-Beryllium-SR3/etc/org.apache.karaf.features.cfg
+featuresBoot=config,standard,region,package,kar,ssh,management,odl-l2switch-switch-ui,odl-dlux-all,odl-netconf-connector-ssh,odl-of-config-rest,odl-ovsdb-openstack,odl-ovsdb-southbound-impl-ui,odl-ovsdb-sfc-ui,odl-openflowplugin-flow-services-ui,odl-restconf,odl-sdninterfaceapp-all,odl-sfc-sb-rest,odl-snmp-plugin,odl-snmp4sdn-all,odl-topoprocessing-framework
+
+
+To list only installed features
+ feature:list -i
+
+
+Logs
+ tail -f  distribution-karaf-0.4.3-Beryllium-SR3/data/log/karaf.log
+
+
+URL : http://157.159.232.200:8181/index.html
+
+
+
+sudo ovs-vsctl set-controller br1 tcp:10.11.12.17:6633
+sudo ovs-vsctl set-manager tcp:10.11.12.21:6640

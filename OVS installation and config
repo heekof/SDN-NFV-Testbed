@@ -65,7 +65,7 @@ http://networkstatic.net/openflow-openvswitch-lab/
     ip address del 172.16.34.5/24 dev eth1
     ovs-vsctl add-br br-eth1
     ovs-vsctl add-port br-eth1 eth1
-    cat /sys/class/net/eth1/address
+    cat /sys/class/net/eth0/address
     fa:16:3e:ba:ec:b8
     ip link set dev br-eth1 address fa:16:3e:ba:ec:b8
     ip link set dev eth1 up
@@ -143,7 +143,8 @@ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 feature:install odl-l2switch-switch-ui odl-dlux-all odl-of-config-rest odl-openflowplugin-flow-services-ui odl-bgpcep-pcep odl-sfc-sb-rest
 On the VM where OVS is installed
-sudo ovs-vsctl set-controller br0 tcp:157.159.232.152:6633
+
+sudo ovs-vsctl set-controller br1 tcp:157.159.232.200:6633
 
 
 ------

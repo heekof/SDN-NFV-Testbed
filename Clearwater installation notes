@@ -40,7 +40,7 @@ If this machine will be a Sprout or Ralf node create the file /etc/chronos/chron
       [exceptions]
       max_ttl = 600
 
-    
+
 
 
       Install Node-Specific Software
@@ -176,9 +176,7 @@ turn_workaround=secret
 ellis_api_key=secret
 ellis_cookie_key=secret
 
-local_ip=192.166.1.X
-public_ip=157.159.232.X
-public_hostname=X.jaafarbendriss.com
+
 
 ------- Install scripts
 
@@ -197,13 +195,16 @@ sudo chmod +x script.sh
 
 /usr/share/clearwater/clearwater-cluster-manager/scripts/check_cluster_state
 
+/usr/share/clearwater/clearwater-config-manager/scripts/upload_shared_config
+
+
 tail -f /var/log/monit.log
 
   ellis
 
 
 
-  sudo ufw enable
+  sudo ufw --force enable
   sudo ufw allow 22/tcp
   sudo ufw allow 2380/tcp
   sudo ufw allow 4000/tcp
@@ -224,7 +225,7 @@ tail -f /var/log/monit.log
 
   bono
 
-  sudo ufw enable
+  sudo ufw --force enable
   sudo ufw allow 22/tcp
   sudo ufw allow 2380/tcp
   sudo ufw allow 4000/tcp
@@ -244,7 +245,7 @@ tail -f /var/log/monit.log
 
   sprout
 
-  sudo ufw enable
+  sudo ufw --force enable
   sudo ufw allow 22/tcp
   sudo ufw allow 2380/tcp
   sudo ufw allow 4000/tcp
@@ -259,7 +260,7 @@ tail -f /var/log/monit.log
   sudo ufw allow 443/tcp
 
   sudo mkdir -p /etc/chronos
-  sudo bash -c ' echo -e "[http] \n   bind-address = 192.166.1.183  \n   bind-port = 7253 \n  threads = 50 \n   [logging] \n   folder = /var/log/chronos \n   level = 2 \n   [alarms] \n  enabled = true \n   [exceptions] \n   max_ttl = 600 \n   [dns] \n   server=8.8.8.8" > /etc/chronos/chronos.conf'
+  sudo bash -c ' echo -e "[http] \n   bind-address = 192.166.1.183\nbind-port = 7253\nthreads = 50\n[logging]\nfolder = /var/log/chronos\nlevel = 2\n[alarms]\nenabled = true\n[exceptions]\nmax_ttl = 600\n" > /etc/chronos/chronos.conf'
 
   sudo DEBIAN_FRONTEND=noninteractive apt-get install sprout --yes --force-yes
   sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes --force-yes
@@ -271,7 +272,7 @@ tail -f /var/log/monit.log
 
   homer
 
-  sudo ufw enable
+  sudo ufw --force enable
   sudo ufw allow 22/tcp
   sudo ufw allow 2380/tcp
   sudo ufw allow 4000/tcp
@@ -286,7 +287,7 @@ tail -f /var/log/monit.log
 
   homestead
 
-  sudo ufw enable
+  sudo ufw --force enable
   sudo ufw allow 22/tcp
   sudo ufw allow 4000/tcp
   sudo ufw allow 2380/tcp
@@ -304,7 +305,7 @@ tail -f /var/log/monit.log
 
   ralf
 
-  sudo ufw enable
+  sudo ufw --force enable
   sudo ufw allow 22/tcp
   sudo ufw allow 2380/tcp
   sudo ufw allow 4000/tcp
@@ -312,7 +313,7 @@ tail -f /var/log/monit.log
   sudo ufw allow 80/tcp
   sudo ufw allow 443/tcp
   sudo mkdir -p /etc/chronos
-  sudo bash -c ' echo -e "[http] \n   bind-address = 192.166.1.182  \n   bind-port = 7253 \n  threads = 50 \n   [logging] \n   folder = /var/log/chronos \n   level = 2 \n   [alarms] \n  enabled = true \n   [exceptions] \n   max_ttl = 600 \n   [dns] \n   server=8.8.8.8" > /etc/chronos/chronos.conf'
+  sudo bash -c ' echo -e "[http]\nbind-address = 192.166.1.182\nbind-port = 7253\nthreads = 50\n[logging]\nfolder = /var/log/chronos\nlevel = 2\n[alarms]\nenabled = true\n[exceptions]\nmax_ttl = 600\n" > /etc/chronos/chronos.conf'
 
   sudo DEBIAN_FRONTEND=noninteractive apt-get install ralf --yes --force-yes
   sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes --force-yes
