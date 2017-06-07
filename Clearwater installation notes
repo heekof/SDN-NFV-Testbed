@@ -59,7 +59,7 @@ If this machine will be a Sprout or Ralf node create the file /etc/chronos/chron
       Sprout
       Install the Sprout package with:
 
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install sprout --yes -force-yes -o DPkg::options::=--force-confnew
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install sprout --yes --force-yes -o DPkg::options::=--force-confnew
       sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
       If you want the Sprout nodes to include a Memento Application server, then install the Memento packages with:
 
@@ -67,17 +67,17 @@ If this machine will be a Sprout or Ralf node create the file /etc/chronos/chron
       Homer
       Install the Homer packages with:
 
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install homer --yes -force-yes -o DPkg::options::=--force-confnew
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install homer --yes --force-yes -o DPkg::options::=--force-confnew
       sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
       Homestead
       Install the Homestead packages with:
 
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install homestead homestead-prov clearwater-prov-tools --yes -force-yes -o DPkg::options::=--force-confnew
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install homestead homestead-prov clearwater-prov-tools --yes --force-yes -o DPkg::options::=--force-confnew
       sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
       Ralf
       Install the Ralf package with:
 
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install ralf --yes -force-yes -o DPkg::options::=--force-confnew
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install ralf --yes --force-yes -o DPkg::options::=--force-confnew
       sudo DEBIAN_FRONTEND=noninteractive apt-get install clearwater-management --yes
 
 
